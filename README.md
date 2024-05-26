@@ -17,7 +17,7 @@ The circuit breaker pattern is meant to enhance application resilience by preven
 
 Overall, the circuit breaker pattern ensures more resilient and responsive interactions between clients and backend systems, leading to better performance and reliability.
 
-## State Diagaram
+## State Diagram
 
 ```mermaid
 stateDiagram-v2
@@ -42,7 +42,7 @@ dependencies: [
 ]
 ```
 
-Normally you'll want to depend on the `CircuitBreake` target:
+Normally you'll want to depend on the `CircuitBreaker` target:
 
 ```swift
 .product(name: "CircuitBreaker", package: "CircuitBreaker")
@@ -90,7 +90,7 @@ let config = CircuitBreaker.Config(
 ```
 
 ### License
-[HL3-MEDIA-MIL-MY-TAL-XUAR](https://firstdonoharm.dev/version/3/0/media-mil-my-tal-xuar.html) Lincense TLDR:
+[HL3-MEDIA-MIL-MY-TAL-XUAR](https://firstdonoharm.dev/version/3/0/media-mil-my-tal-xuar.html) License TLDR:
 
-Don't worry*, uou are free to modify, distribute and use this software without meantioning the author. However there are a few restrictions that promotes ethical software development by requiring adherence to guidelines that prevent harm and respect human rights and ensures the software is freely usable and modifiable.
+Don't worry*, you are free to modify, distribute and use this software for private or commercial use without mentioning the author. However there are a few restrictions that promotes ethical software development by requiring adherence to guidelines that prevent harm and respect human rights and ensures the software is freely usable and modifiable.
 
