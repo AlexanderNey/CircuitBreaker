@@ -20,7 +20,7 @@ jobs:
     name: Swift ${{ matrix.swift }}
     strategy:
       matrix:
-        swift: ["5.7","5.8", "5.9"]
+        swift: ["5.8", "5.9"]
     runs-on: macos-latest
     steps:
       - uses: swift-actions/setup-swift@v2
@@ -30,4 +30,4 @@ jobs:
       - name: Build
         run: swift build
       - name: Run tests
-        run: swift test | xcpretty
+        run: swift test -c release 2>&1 | xcpretty
