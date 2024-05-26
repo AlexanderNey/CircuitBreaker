@@ -1,7 +1,8 @@
 import Foundation
 
+@available(*, unavailable, message: "Implementation in progress, do not use.")
 @CircuitBreakerActor
-public final class CircuitBreakerGroup<Key: Hashable & CustomStringConvertible> {
+private final class CircuitBreakerGroup<Key: Hashable & CustomStringConvertible> {
     let name: String
     let baseConfig: CircuitBreaker.Config
     private var collection: [Key: CircuitBreaker] = [:]
