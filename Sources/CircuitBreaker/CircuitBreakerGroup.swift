@@ -2,7 +2,6 @@ import Foundation
 
 @CircuitBreakerActor
 public final class CircuitBreakerGroup<Key: Hashable & CustomStringConvertible> {
-
     let name: String
     let baseConfig: CircuitBreaker.Config
     private var collection: [Key: CircuitBreaker] = [:]
@@ -41,9 +40,7 @@ public final class CircuitBreakerGroup<Key: Hashable & CustomStringConvertible> 
         return breaker
     }
 
-    private func purge() {
-
-    }
+    private func purge() {}
 
     public func openAll() {
         collection.values.forEach { $0.open() }

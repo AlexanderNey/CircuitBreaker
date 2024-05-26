@@ -7,26 +7,25 @@ import Foundation
 }
 
 /**
-CircuitBreaker is a class that implements the circuit breaker pattern to manage the resiliency of network calls
-or other unreliable operations. It has three states: Closed, Open, and Half-Open.
+ CircuitBreaker is a class that implements the circuit breaker pattern to manage the resiliency of network calls
+ or other unreliable operations. It has three states: Closed, Open, and Half-Open.
 
-If the circuit is open, it throws an error. If half-open, it allows one attempt and resets if successful,
-otherwise opens again. If closed, it attempts normal operation and records failures.
+ If the circuit is open, it throws an error. If half-open, it allows one attempt and resets if successful,
+ otherwise opens again. If closed, it attempts normal operation and records failures.
 
-# Configuration: #
-- `name` / `group`: Strings to identify the circuit breaker
-- `maxFailures`: The number of failures before the circuit breaker trips to the open state.
-- `rollingWindow`: Time in seconds where failures are recorded.
-- `recoveryTimeout`: Time in seconds to wait before transitioning from open to half-open state.
-- `ErrorStrategy`: can be passed to trip on specific errors e.g. ignore network timeout / connectivity issues
-# Example: #
-maxFailures = 3, rollingWindow = 5sec, recoveryTimeout = 30sec
-If 3 failures happen within 5 seconds the breaker will open and all successive task will fail for the next 30 seconds.
-After the recovery time the breaker will be set to half open.
-*/
+ # Configuration: #
+ - `name` / `group`: Strings to identify the circuit breaker
+ - `maxFailures`: The number of failures before the circuit breaker trips to the open state.
+ - `rollingWindow`: Time in seconds where failures are recorded.
+ - `recoveryTimeout`: Time in seconds to wait before transitioning from open to half-open state.
+ - `ErrorStrategy`: can be passed to trip on specific errors e.g. ignore network timeout / connectivity issues
+ # Example: #
+ maxFailures = 3, rollingWindow = 5sec, recoveryTimeout = 30sec
+ If 3 failures happen within 5 seconds the breaker will open and all successive task will fail for the next 30 seconds.
+ After the recovery time the breaker will be set to half open.
+ */
 @CircuitBreakerActor
 public final class CircuitBreaker {
-
     enum State {
         case open
         case halfopen
@@ -47,7 +46,7 @@ public final class CircuitBreaker {
         }
     }
 
-    init(config: Config, errorStrategy: CircuitBreakerErrorStrategy = DefaultErrorStrategy(), currentTime: @escaping () -> TimeInterval ) {
+    init(config: Config, errorStrategy: CircuitBreakerErrorStrategy = DefaultErrorStrategy(), currentTime: @escaping () -> TimeInterval) {
         self.config = config
         self.errorStrategy = errorStrategy
         self.currentTime = currentTime
@@ -74,7 +73,7 @@ public final class CircuitBreaker {
         do {
             let result = try await task()
             if state == .halfopen {
-              close()
+                close()
             }
             return result
         } catch {
@@ -88,7 +87,8 @@ public final class CircuitBreaker {
                 open()
             } else if let timeWindow = currentFailureTimeWindow,
                       currentFailureTimestamps.count >= config.maxFailures,
-                      timeWindow <= config.rollingWindow {
+                      timeWindow <= config.rollingWindow
+            {
                 // Reached maximum number of failures allowed
                 // in time window before tripping circuit
                 open()
@@ -129,7 +129,6 @@ public final class CircuitBreaker {
 }
 
 public extension CircuitBreaker {
-
     struct Config {
         /// Name of the service or category of tasks
         var name: String
