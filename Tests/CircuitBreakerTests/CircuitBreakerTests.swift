@@ -2,7 +2,6 @@ import XCTest
 import Combine
 @testable import CircuitBreaker
 
-
 final class CircuitBreakerTests: XCTestCase {
 
     var config: CircuitBreaker.Config = .init(
@@ -21,16 +20,8 @@ final class CircuitBreakerTests: XCTestCase {
         rollingWindow: 10
     )
 
-    override func setUp() async throws {
-        try await super.setUp()
-    }
-
-    override func tearDown() async throws {
-        try await super.tearDown()
-    }
-
     func testClosedStateOneTask() async throws {
-       
+
         // Given
         var currentTime: TimeInterval = 0
         let sut = await CircuitBreaker(config: config) {
@@ -42,7 +33,7 @@ final class CircuitBreakerTests: XCTestCase {
             on: sut,
             currentTime: &currentTime,
             results: [
-                (.success("ok"), 1),
+                (.success("ok"), 1)
             ]
         )
 
@@ -70,7 +61,7 @@ final class CircuitBreakerTests: XCTestCase {
                 (.success("2"), 1),
                 (.success("3"), 1),
                 (.success("4"), 1),
-                (.success("5"), 1),
+                (.success("5"), 1)
             ]
         )
 
@@ -81,7 +72,7 @@ final class CircuitBreakerTests: XCTestCase {
             .success("2"),
             .success("3"),
             .success("4"),
-            .success("5"),
+            .success("5")
         ]
         )
     }
@@ -104,10 +95,9 @@ final class CircuitBreakerTests: XCTestCase {
                 (.failure(SubTaskError()), 1),
                 (.failure(SubTaskError()), 1),
                 (.failure(SubTaskError()), 1),
-                (.failure(SubTaskError()), 1),
+                (.failure(SubTaskError()), 1)
             ]
         )
-
 
         // Then
         XCTAssertEqual(results, [
@@ -116,7 +106,7 @@ final class CircuitBreakerTests: XCTestCase {
             .failure(SubTaskError().equatable),
             .failure(SubTaskError().equatable),
             .failure(SubTaskError().equatable),
-            .failure(CircuitOpenError(lastError: nil, name: "", group: nil).equatable),
+            .failure(CircuitOpenError(lastError: nil, name: "", group: nil).equatable)
         ]
         )
     }
@@ -141,10 +131,9 @@ final class CircuitBreakerTests: XCTestCase {
                 (.success("ok"), 1),
                 (.failure(SubTaskError()), 1),
                 (.failure(SubTaskError()), 1), // Trips
-                (.success("ok"), 1),
+                (.success("ok"), 1)
             ]
         )
-
 
         // Then
         XCTAssertEqual(results, [
@@ -155,11 +144,10 @@ final class CircuitBreakerTests: XCTestCase {
             .success("ok"),
             .failure(SubTaskError().equatable),
             .failure(SubTaskError().equatable),
-            .failure(CircuitOpenError(lastError: nil, name: "", group: nil).equatable),
+            .failure(CircuitOpenError(lastError: nil, name: "", group: nil).equatable)
         ]
         )
     }
-
 
     func testNotOpenOnManyFailuresOutsideWindow() async throws {
 
@@ -180,7 +168,7 @@ final class CircuitBreakerTests: XCTestCase {
                 (.failure(SubTaskError()), delayToTripOn6th),
                 (.failure(SubTaskError()), delayToTripOn6th),
                 (.failure(SubTaskError()), delayToTripOn6th),
-                (.failure(SubTaskError()), delayToTripOn6th),
+                (.failure(SubTaskError()), delayToTripOn6th)
             ]
         )
 
@@ -191,7 +179,7 @@ final class CircuitBreakerTests: XCTestCase {
             .failure(SubTaskError().equatable),
             .failure(SubTaskError().equatable),
             .failure(SubTaskError().equatable),
-            .failure(CircuitOpenError(lastError: nil, name: "", group: nil).equatable),
+            .failure(CircuitOpenError(lastError: nil, name: "", group: nil).equatable)
         ]
         )
     }
@@ -214,7 +202,7 @@ final class CircuitBreakerTests: XCTestCase {
                 (.failure(SubTaskError()), 1), // Trips
                 (.success("ok"), 20), // Recover
                 (.failure(SubTaskError()), 1), // Trips again
-                (.success("ok"), 1),
+                (.success("ok"), 1)
             ]
         )
 
@@ -225,7 +213,7 @@ final class CircuitBreakerTests: XCTestCase {
             .failure(SubTaskError().equatable),
             .failure(CircuitOpenError(lastError: nil, name: "", group: nil).equatable),
             .failure(SubTaskError().equatable),
-            .failure(CircuitOpenError(lastError: nil, name: "", group: nil).equatable),
+            .failure(CircuitOpenError(lastError: nil, name: "", group: nil).equatable)
         ])
     }
 
@@ -246,7 +234,7 @@ final class CircuitBreakerTests: XCTestCase {
                 (.failure(SubTaskError()), 1),
                 (.failure(SubTaskError()), 1), // Trips
                 (.success("ok"), 20), // Recover
-                (.success("ok"), 1),
+                (.success("ok"), 1)
             ]
         )
 
@@ -256,10 +244,9 @@ final class CircuitBreakerTests: XCTestCase {
             .failure(SubTaskError().equatable),
             .failure(SubTaskError().equatable),
             .failure(CircuitOpenError(lastError: nil, name: "", group: nil).equatable),
-            .success("ok"),
+            .success("ok")
         ])
     }
-
 
     func testCancelTasksNotOpen() async throws {
 
@@ -284,7 +271,7 @@ final class CircuitBreakerTests: XCTestCase {
             await t1r.result.mapError(\.equatable),
             await t2r.result.mapError(\.equatable),
             await t3r.result.mapError(\.equatable),
-            await t4r.result.mapError(\.equatable),
+            await t4r.result.mapError(\.equatable)
         ]
 
         // Then
@@ -292,7 +279,7 @@ final class CircuitBreakerTests: XCTestCase {
             .failure(CancellationError().equatable),
             .failure(CancellationError().equatable),
             .failure(CancellationError().equatable),
-            .success("ok"),
+            .success("ok")
         ])
     }
 
@@ -325,7 +312,7 @@ final class CircuitBreakerTests: XCTestCase {
                 (.failure(SubTaskError()), 1),
                 (.failure(SubTaskError()), 1),
                 (.failure(SubTaskError()), 1),
-                (.success("ok"), 1),
+                (.success("ok"), 1)
             ]
         )
 
@@ -335,13 +322,13 @@ final class CircuitBreakerTests: XCTestCase {
             .failure(SubTaskError().equatable),
             .failure(SubTaskError().equatable),
             .failure(SubTaskError().equatable),
-            .success("ok"),
+            .success("ok")
         ])
     }
 
     func testPerformanceAndMemory() throws {
         throw XCTSkip("Run on device only")
-        
+
         self.measure(metrics: [XCTMemoryMetric(), XCTClockMetric()]) {
             let exp = expectation(description: "Finished")
             Task {
@@ -349,7 +336,7 @@ final class CircuitBreakerTests: XCTestCase {
                 let sut = await CircuitBreaker(config: config) {
                     currentTime
                 }
-                
+
                 for i in (0..<100_000) {
                     let (t, r) = await submitTask(to: sut, result: .success("\(i)"))
                     await t.unblock()
@@ -408,11 +395,9 @@ private func submitTask(
     return (barrierTask, resultTask)
 }
 
-
 extension Result: CustomDebugStringConvertible where
     Success: CustomDebugStringConvertible,
-    Failure: CustomDebugStringConvertible
-{
+    Failure: CustomDebugStringConvertible {
 
     public var debugDescription: String {
         switch self {

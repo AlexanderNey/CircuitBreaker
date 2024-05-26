@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Global Actor to execute all Circuit Breaker relevant manipulations on
 /// This is to guarantee thread safety
 @globalActor public actor CircuitBreakerActor: GlobalActor {
@@ -54,7 +53,6 @@ public final class CircuitBreaker {
         self.currentTime = currentTime
     }
 
-
     /// Executes a the task and updates the circuit state
     /// e.g. if task fails it will record a failure according to the configuration and `ErrorStrategy`.
     /// On successive failures - once the circuit opens, this will throw a `FastFailError` for
@@ -95,7 +93,7 @@ public final class CircuitBreaker {
                 // in time window before tripping circuit
                 open()
             }
-            
+
             throw error
         }
     }
@@ -129,7 +127,6 @@ public final class CircuitBreaker {
         state = .closed
     }
 }
-
 
 public extension CircuitBreaker {
 

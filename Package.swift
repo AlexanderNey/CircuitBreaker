@@ -9,13 +9,13 @@ let package = Package(
     products: [
         .library(
             name: "CircuitBreaker",
-            targets: ["CircuitBreaker"]),
+            targets: ["CircuitBreaker"])
     ],
     targets: [
         .target(
             name: "CircuitBreaker"),
         .testTarget(
             name: "CircuitBreakerTests",
-            dependencies: ["CircuitBreaker"]),
+            dependencies: ["CircuitBreaker"])
     ]
 )

@@ -5,7 +5,7 @@ public final class CircuitBreakerGroup<Key: Hashable & CustomStringConvertible> 
 
     let name: String
     let baseConfig: CircuitBreaker.Config
-    private var collection: [Key : CircuitBreaker] = [:]
+    private var collection: [Key: CircuitBreaker] = [:]
     private var purgeTask: Task<Void, Never>?
 
     init(name: String, baseConfig: CircuitBreaker.Config) {
