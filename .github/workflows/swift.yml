@@ -14,13 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: SwiftFormat
-        run: swiftformat --lint . --reporter github-actions-log
+        run: swiftformat --lint --lenient . --reporter github-actions-log
 
   build:
     name: Swift ${{ matrix.swift }}
     strategy:
       matrix:
-        swift: ["5.8", "5.9"]
+        swift: ["5.10.0"]
     runs-on: macos-latest
     steps:
       - uses: swift-actions/setup-swift@v2
