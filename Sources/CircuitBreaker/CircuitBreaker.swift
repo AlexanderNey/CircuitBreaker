@@ -38,16 +38,16 @@ public final class CircuitBreaker {
     private var config: Config
     private var lastOpenedTime: TimeInterval?
     private var lastError: Error?
-    private var errorStrategy: ErrorStrategy
+    private var errorStrategy: CircuitBreakerErrorStrategy
     private var currentTime: () -> TimeInterval
 
-    public convenience init(config: Config, errorStrategy: ErrorStrategy = DefaultErrorStrategy()) {
+    public convenience init(config: Config, errorStrategy: CircuitBreakerErrorStrategy = DefaultErrorStrategy()) {
         self.init(config: config, errorStrategy: errorStrategy) {
             Date.timeIntervalSinceReferenceDate
         }
     }
 
-    init(config: Config, errorStrategy: ErrorStrategy = DefaultErrorStrategy(), currentTime: @escaping () -> TimeInterval ) {
+    init(config: Config, errorStrategy: CircuitBreakerErrorStrategy = DefaultErrorStrategy(), currentTime: @escaping () -> TimeInterval ) {
         self.config = config
         self.errorStrategy = errorStrategy
         self.currentTime = currentTime
@@ -157,14 +157,14 @@ public extension CircuitBreaker {
         }
     }
 
-    protocol ErrorStrategy {
-        func shouldTrip(on error: Error) -> Bool
-    }
-
-    struct DefaultErrorStrategy: ErrorStrategy {
+    struct DefaultErrorStrategy: CircuitBreakerErrorStrategy {
         public func shouldTrip(on error: any Error) -> Bool { true }
         public init() {}
     }
+}
+
+public protocol CircuitBreakerErrorStrategy {
+    func shouldTrip(on error: Error) -> Bool
 }
 
 /// Error thrown if the circuit breaker is open

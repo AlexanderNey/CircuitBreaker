@@ -288,7 +288,7 @@ final class CircuitBreakerTests: XCTestCase {
     func testErrorStrategyNotOpen() async throws {
 
         // Given
-        struct CustomErrorStrategy: CircuitBreaker.ErrorStrategy {
+        struct CustomErrorStrategy: CircuitBreakerErrorStrategy {
             func shouldTrip(on error: any Error) -> Bool {
                 guard error is SubTaskError else {
                     return true
