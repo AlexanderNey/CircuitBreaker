@@ -1,6 +1,7 @@
 [![Swift](https://img.shields.io/badge/Swift-5.7_5.8_5.9-orange?style=flat-square)](https://img.shields.io/badge/Swift-5.7_5.8_5.9-Orange?style=flat-square)
 [![Platforms](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS-blue?style=flat-square)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_vision_OS_Linux_Windows_Android-Green?style=flat-square)
 [![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)
+![GitHub Release](https://img.shields.io/github/v/release/AlexanderNey/CircuitBreaker)
 [![Hippocratic License HL3-MEDIA-MIL-MY-TAL-XUAR](https://img.shields.io/static/v1?label=Hippocratic%20License&message=HL3-MEDIA-MIL-MY-TAL-XUAR&labelColor=5e2751&color=bc8c3d)](https://firstdonoharm.dev/version/3/0/media-mil-my-tal-xuar.html)
 
 
