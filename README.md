@@ -1,5 +1,4 @@
-[![Swift](https://img.shields.io/badge/Swift-5.7-5.9-F05138?logo=swift&logoColor=white)](https://swift.org)
-
+[![Swift](https://img.shields.io/badge/Swift-5.7--5.9-F05138?logo=swift&logoColor=white)](https://swift.org)
 [![Platforms](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS-blue?style=flat-square)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_vision_OS_Linux_Windows_Android-Green?style=flat-square)
 [![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)
 ![GitHub Release](https://img.shields.io/github/v/release/AlexanderNey/CircuitBreaker)
