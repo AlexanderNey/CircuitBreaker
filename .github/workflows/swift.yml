@@ -10,10 +10,15 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  lint:
     runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: SwiftFormat
+        run: swiftformat --lint . --reporter github-actions-log
 
+  build:
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v4
     - name: Build
