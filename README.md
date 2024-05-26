@@ -1,3 +1,9 @@
+[![Swift](https://img.shields.io/badge/Swift-5.7_5.8_5.9-orange?style=flat-square)](https://img.shields.io/badge/Swift-5.7_5.8_5.9-Orange?style=flat-square)
+[![Platforms](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS-blue?style=flat-square)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_vision_OS_Linux_Windows_Android-Green?style=flat-square)
+[![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)
+[![Hippocratic License HL3-MEDIA-MIL-MY-TAL-XUAR](https://img.shields.io/static/v1?label=Hippocratic%20License&message=HL3-MEDIA-MIL-MY-TAL-XUAR&labelColor=5e2751&color=bc8c3d)](https://firstdonoharm.dev/version/3/0/media-mil-my-tal-xuar.html)
+
+
 
 # Circuit Breaker #
 The circuit breaker pattern is meant to enhance application resilience by preventing repeated attempts to perform operations that are likely to fail. Similar to an electrical circuit breaker, it monitors recent failures in a service or operation. If failures exceed a threshold within a defined window, the circuit breaker temporarily stops further attempts, allowing the service time to recover. This prevents cascading failures and conserves resources, improving application stability.
@@ -23,6 +29,29 @@ stateDiagram-v2
     HalfOpened --> Opened : failure
     
 ```
+
+## Installation
+
+### Swift Package Manager
+
+Once you have your Swift package set up, adding a dependency is as easy as adding it to the `dependencies` value of your `Package.swift` or the Package list in Xcode.
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/AlexanderNey/CircuitBreaker", .upToNextMajor(from: "1.0.0"))
+]
+```
+
+Normally you'll want to depend on the `CircuitBreake` target:
+
+```swift
+.product(name: "CircuitBreaker", package: "CircuitBreaker")
+```
+
+See [Adding Package Dependencies to Your App](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) on how to use this library with Swift PM.
+
+Additional info to the [Swift Package Manager](https://swift.org/package-manager/).
+
 
 ## Usage
 The following code demonstrates how to use a CircuitBreaker to execute asynchronous tasks, such as network requests:
@@ -61,6 +90,7 @@ let config = CircuitBreaker.Config(
 ```
 
 ### License
-[![Hippocratic License HL3-MEDIA-MIL-MY-TAL-XUAR](https://img.shields.io/static/v1?label=Hippocratic%20License&message=HL3-MEDIA-MIL-MY-TAL-XUAR&labelColor=5e2751&color=bc8c3d)](https://firstdonoharm.dev/version/3/0/media-mil-my-tal-xuar.html)
+[HL3-MEDIA-MIL-MY-TAL-XUAR](https://firstdonoharm.dev/version/3/0/media-mil-my-tal-xuar.html) Lincense TLDR:
 
-HL3 license promotes ethical software development by requiring adherence to guidelines that prevent harm and respect human rights and ensures the software is freely usable and modifiable.
+Don't worry*, uou are free to modify, distribute and use this software without meantioning the author. However there are a few restrictions that promotes ethical software development by requiring adherence to guidelines that prevent harm and respect human rights and ensures the software is freely usable and modifiable.
+
